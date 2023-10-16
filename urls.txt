@@ -1,0 +1,9 @@
+## developers console
+
+https://console.cloud.google.com/apis/credentials?project=disney-clone-9dc82
+
+
+
+## firebase
+
+https://console.firebase.google.com/project/disney-clone-9dc82/firestore/data/~2F
