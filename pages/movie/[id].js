@@ -1,12 +1,25 @@
-
-function Movie({ result }) {
-  console.log(result);
-  return <div>[id] </div>;
+"use client";
+import "../../app/globals.css";
+import Header from "@/src/components/Header";
+import { SessionProvider } from "@/src/components/SessionProvider";
+import { useSession, getSession } from "next-auth/react";
+function Movie({ result, session }) {
+  console.log(session);
+  return (
+    <SessionProvider>
+      <div className="relative">
+        <Header />
+        <p className="text-red-500" >
+          helloo
+        </p>
+      </div>
+    </SessionProvider>
+  );
 }
 
 export default Movie;
 export async function getServerSideProps(context) {
-  //   const session = await getSession(context);
+  const session = await getSession(context);
   const { id } = context.query;
   const options = {
     method: "GET",
@@ -22,7 +35,7 @@ export async function getServerSideProps(context) {
 
   return {
     props: {
-      //   session,
+      session,
       result: request,
     },
   };

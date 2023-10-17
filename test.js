@@ -17,6 +17,7 @@ const options = {
   headers: {
     accept: "application/json",
     Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDNmY2Q3MmIwN2VjNTY5ZWZjY2ZjMGIwYzZiODc4YyIsInN1YiI6IjY1MmMwYjRhMWYzZTYwMDBlMjkwOTBkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U5whOHRstQODVskBY8qrJgSSLGX6EhUU5hMdWyyHcYQ`,
+    "Cache-Control": "no-cache",
   },
 };
 
@@ -26,7 +27,7 @@ const options = {
     options
   )
     .then((response) => response.json())
-    // .then((response) => console.log(response))
+    .then((response) => console.log(response))
     .catch((err) => console.error(err));
 
 

@@ -33,6 +33,10 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
 test.js
 urls.txt
-/dummydata
+/dummydata/
+C:\Users\DavidMwas\Desktop\nextjs\disney-clone\urls.txt
+C:\Users\DavidMwas\Desktop\nextjs\disney-clone\dummydata
+C:\Users\DavidMwas\Desktop\nextjs\disney-clone\*test.js

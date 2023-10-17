@@ -1,22 +1,15 @@
-// "use client";
-import { getServerSession } from "next-auth";
-import { authOptions } from "@/pages/api/auth/[...nextauth]";
-import Header from "@/src/components/Header";
-import Hero from "@/src/components/Hero";
-import { SessionProvider } from "@/src/components/SessionProvider";
-import Slider from "@/src/components/Slider";
-import Brands from "@/src/components/Brands";
-import MoviesCollection from "@/src/components/MoviesCollection";
-import ShowsCollection from "@/src/components/ShowsCollection";
-// import { PopularMoviesRes } from "@/dummydata/popularMovies";
-// import { PopularShowsRes } from "@/dummydata/popularShows";
+
+import Main from "@/src/components/Main";
+import { data } from "@/dummydata/data";
 
 async function fetchData() {
+  const timestamp = new Date().getTime();
   const options = {
     method: "GET",
     headers: {
       accept: "application/json",
       Authorization: `Bearer ${process.env.API_KEY}`,
+      "Cache-Control": "no-cache",
     },
   };
   const [
@@ -26,19 +19,20 @@ async function fetchData() {
     top_ratedShowsRes,
   ] = await Promise.all([
     fetch(
-      "https://api.themoviedb.org/3/movie/popular?language=en-US&page=1",
+      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&timestamp=${timestamp}`,
+      options,
+      { next: { revalidate: 1000 } }
+    ),
+    fetch(
+      `https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&timestamp=${timestamp}`,
       options
     ),
     fetch(
-      "https://api.themoviedb.org/3/tv/popular?language=en-US&page=1",
+      `https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1&timestamp=${timestamp}`,
       options
     ),
     fetch(
-      "https://api.themoviedb.org/3/movie/top_rated?language=en-US&page=1",
-      options
-    ),
-    fetch(
-      "https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1",
+      `https://api.themoviedb.org/3/tv/top_rated?language=en-US&page=1&timestamp=${timestamp}`,
       options
     ),
   ]);
@@ -54,46 +48,24 @@ async function fetchData() {
     popularShows: popularShows.results,
     top_ratedMovies: top_ratedMovies.results,
     top_ratedShows: top_ratedShows.results,
+    // revalidate: 0,
   };
 }
 async function Home() {
-  // const { data: session } = useSession();
-  const session = await getServerSession(authOptions);
-  const Data = await fetchData();
-
-  return (
-    <SessionProvider session={session}>
-      <main className="">
-        <Header />
-        {!session ? (
-          <Hero />
-        ) : (
-          <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-2]">
-            <Slider />
-            <Brands />
-            <MoviesCollection
-              results={Data.popularMovies}
-              title="Popular Movies"
-            />
-            <ShowsCollection
-              results={Data.popularShows}
-              title="Popular Shows"
-            />
-
-            <MoviesCollection
-              results={Data.top_ratedMovies}
-              title="Top Rated Movies"
-            />
-
-            <ShowsCollection
-              results={Data.top_ratedShows}
-              title="Top Rated Shows"
-            />
-          </main>
-        )}
-      </main>
-    </SessionProvider>
-  );
+  let Data;
+  try {
+    const res = await fetchData();
+    Data = res;
+    // console.log(Data);
+  } catch (error) {
+    if (error) {
+      Data = data;
+    }
+    console.error(`Error${error}`);
+  }
+  //
+  // console.log(Data);
+  return <Main Data={Data} />;
 }
 
 export default Home;
