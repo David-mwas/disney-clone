@@ -4,7 +4,7 @@ import { movie } from "@/dummydata/singlemovie";
 import "../../app/globals.css";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 // import ReactPlayer from "react-player";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "@/src/components/Header";
@@ -45,6 +45,7 @@ function Movie({ result, session }) {
                 }
                 layout="fill"
                 objectFit="cover"
+                priority={true}
               />
             </div>
             <div className="absolute inset-y-12 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50">

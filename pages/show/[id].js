@@ -4,7 +4,7 @@ import "../../app/globals.css";
 import { getSession, useSession } from "next-auth/react";
 import { SessionProvider } from "@/src/components/SessionProvider";
 import Head from "next/head";
-import Image from "next/image";
+import Image from "next/legacy/image";
 import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 import Header from "@/src/components/Header";
@@ -53,6 +53,7 @@ function Show({ result, session }) {
                 }
                 layout="fill"
                 objectFit="cover"
+                priority={true}
               />
             </div>
             <div className="absolute inset-y-12 md:inset-y-auto md:bottom-10 inset-x-4 md:inset-x-12 space-y-6 z-50">
