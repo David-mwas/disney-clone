@@ -61,7 +61,7 @@ async function Home() {
     if (error) {
       Data = data;
     }
-    console.error(`Error${error}`);
+    console.error(` Error ${error}`);
   }
   //
   // console.log(Data);
