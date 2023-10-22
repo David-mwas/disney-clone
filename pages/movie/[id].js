@@ -28,7 +28,7 @@ function Movie({ result, session }) {
   //   (element) => element.type //=== "Clip"
   // );
 
-  console.log(result);
+  console.log(session);
   return (
     <SessionProvider>
       <div className="relative">
