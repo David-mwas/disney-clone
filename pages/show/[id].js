@@ -30,7 +30,7 @@ function Show({ result, session }) {
   const index = result?.videos?.results?.findIndex(
     (element) => element.type //=== "Clip"
   );
-  console.log(session);
+  console.log(results);
   return (
     <SessionProvider>
       <div className="relative">
