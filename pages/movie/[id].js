@@ -11,18 +11,19 @@ import Header from "@/src/components/Header";
 import { SessionProvider } from "@/src/components/SessionProvider";
 import { useSession, getSession } from "next-auth/react";
 import Hero from "@/src/components/Hero";
-function Movie({ result, session }) {
+function Movie({ result }) {
+  const { data: session } = useSession();
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
   // const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const router = useRouter();
   const [showPlayer, setShowPlayer] = useState(false);
-  // useEffect(() => {
-  //   if (!session) {
-  //     router.push("/");
-  //   }
-  // }, []);
+  useEffect(() => {
+    if (!session) {
+      router.push("/");
+    }
+  }, []);
 
   // const index = result?.videos?.results?.findIndex(
   //   (element) => element.type //=== "Clip"
@@ -30,7 +31,7 @@ function Movie({ result, session }) {
 
   console.log(session);
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <div className="relative">
         <Header />
         {!session ? (
@@ -44,8 +45,8 @@ function Movie({ result, session }) {
                 // src={
                 //   `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
                 //   `${BASE_URL}${result.poster_path}`
-                  // }
-                  
+                // }
+
                 layout="fill"
                 objectFit="cover"
                 priority={true}
