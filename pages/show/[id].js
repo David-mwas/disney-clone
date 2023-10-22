@@ -150,7 +150,7 @@ export async function getServerSideProps(context) {
     method: "GET",
     headers: {
       accept: "application/json",
-      Authorization: `Bearer ${process.env.API_KEY}`,
+      Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDNmY2Q3MmIwN2VjNTY5ZWZjY2ZjMGIwYzZiODc4YyIsInN1YiI6IjY1MmMwYjRhMWYzZTYwMDBlMjkwOTBkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U5whOHRstQODVskBY8qrJgSSLGX6EhUU5hMdWyyHcYQ`,
     },
   };
   const request = await fetch(
