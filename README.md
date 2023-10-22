@@ -1,3 +1,20 @@
+# ![Alt text](app/favicon.ico)ISNEY+
+Fully fredged Disney+ clone with responsive pages , session providers, Trailer model player.
+## Technologies 
+- NEXTJS13 for NextAuth, SSR, SEO, high caching abilities for session
+- Firebase for GoogleAuth,
+- TailwindCSS for styling and smooth animations
+- TMDB and RapidAPI for movie fetch 
+- Its completely resposnsive in ALL devices 
+- Made with 🧡 and deployed on vercel
+By [David-mwas](https://github.com/David-mwas)
+
+You can find the repo here 👉 [github](https://github.com/David-mwas/disney-clone)
+## Snapshots
+![Alt text](public/disney-clone.png)
+![Alt text](public/disney-movies.png)
+![Alt text](public/disneytrailer.png)
+
 This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
 
 ## Getting Started

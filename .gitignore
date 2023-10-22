@@ -35,7 +35,8 @@ yarn-error.log*
 next-env.d.ts
 
 test.js
-urls.txt
+urls.*txt
+*.txt
 /dummydata/
 C:\Users\DavidMwas\Desktop\nextjs\disney-clone\urls.txt
 C:\Users\DavidMwas\Desktop\nextjs\disney-clone\dummydata
