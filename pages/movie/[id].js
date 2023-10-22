@@ -11,8 +11,7 @@ import Header from "@/src/components/Header";
 import { SessionProvider } from "@/src/components/SessionProvider";
 import { useSession, getSession } from "next-auth/react";
 import Hero from "@/src/components/Hero";
-function Movie({ result }) {
-  const { data: session } = useSession();
+function Movie({ result, session }) {
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
@@ -45,8 +44,8 @@ function Movie({ result }) {
                 // src={
                 //   `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
                 //   `${BASE_URL}${result.poster_path}`
-                // }
-
+                  // }
+                  
                 layout="fill"
                 objectFit="cover"
                 priority={true}
