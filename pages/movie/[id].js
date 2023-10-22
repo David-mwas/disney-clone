@@ -15,7 +15,7 @@ function Movie({ result, session }) {
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
-  const BASE_URL = "https://image.tmdb.org/t/p/original/";
+  // const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const router = useRouter();
   const [showPlayer, setShowPlayer] = useState(false);
   useEffect(() => {
@@ -24,11 +24,11 @@ function Movie({ result, session }) {
     }
   }, []);
 
-  const index = result?.videos?.results?.findIndex(
-    (element) => element.type //=== "Clip"
-  );
+  // const index = result?.videos?.results?.findIndex(
+  //   (element) => element.type //=== "Clip"
+  // );
 
-  // console.log(result);
+  console.log(result);
   return (
     <SessionProvider>
       <div className="relative">
@@ -36,13 +36,16 @@ function Movie({ result, session }) {
         {!session ? (
           <Hero />
         ) : (
-          <section className="relative z-50">
+          <section className="relative z-50 bg-[rgba(0,0,0,.2)]">
+            <div className="min-h-[calc(100vh-72px)]  z-50 bg-[rgba(0,0,0,.6)] absolute top-0"></div>
             <div className="relative min-h-[calc(100vh-72px)]">
               <Image
-                src={
-                  `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
-                  `${BASE_URL}${result.poster_path}`
-                }
+                src={result?.image}
+                // src={
+                //   `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
+                //   `${BASE_URL}${result.poster_path}`
+                  // }
+                  
                 layout="fill"
                 objectFit="cover"
                 priority={true}
@@ -87,14 +90,14 @@ function Movie({ result, session }) {
                 </div>
               </div>
 
-              <p className="text-xs md:text-sm">
-                {result.release_date || result.first_air_date} •{" "}
-                {result.number_of_seasons}{" "}
-                {result.number_of_seasons === 1 ? "Season" : "Seasons"} •{" "}
-                {result.genres.map((genre) => genre.name + " ")}{" "}
+              <p className="text-sm md:text-sm">
+                {result?.year || result.first_air_date} • {result?.genre}{" "}
+                {result?.writers[0]}{" "}
+                {/* {result.number_of_seasons === 1 ? "Season" : "Seasons"} •{" "}
+                {result.genres.map((genre) => genre.name + " ")}{" "} */}
               </p>
               <h4 className="text-sm md:text-lg max-w-4xl">
-                {result.overview}
+                {result?.description}
               </h4>
             </div>
 
@@ -119,7 +122,8 @@ function Movie({ result, session }) {
               </div>
               <div className="relative pt-[56.25%]">
                 <ReactPlayer
-                  url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+                  // url={`https://www.youtube.com/watch?v=${result.videos?.results[index]?.key}`}
+                  url={result?.trailer}
                   width="100%"
                   height="100%"
                   style={{ position: "absolute", top: "0", left: "0" }}
@@ -143,15 +147,15 @@ export async function getServerSideProps(context) {
   const options = {
     method: "GET",
     headers: {
-      accept: "application/json",
-      Authorization: `Bearer ${process.env.API_KEY}`,
+      "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+      "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
     },
   };
   // let data = {};
   // let request;
   // try {
   const request = await fetch(
-    `https://api.themoviedb.org/3/movie/${id}?language=en-US`,
+    `https://imdb-top-100-movies.p.rapidapi.com/${id}`,
     options
   )
     .then((response) => response?.json())

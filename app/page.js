@@ -1,4 +1,3 @@
-
 import Main from "@/src/components/Main";
 import { data } from "@/dummydata/data";
 
@@ -12,17 +11,31 @@ async function fetchData() {
       "Cache-Control": "no-cache",
     },
   };
+  const url =
+    "https://imdb-top-100-movies.p.rapidapi.com/";
+  const RapidAPIoptions = {
+    method: "GET",
+    headers: {
+      "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
+      "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
+      "Cache-Control": "no-cache",
+    },
+  };
   const [
     popularMoviesRes,
     popularShowsRes,
     top_ratedMoviesRes,
     top_ratedShowsRes,
   ] = await Promise.all([
-    fetch(
-      `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&timestamp=${timestamp}`,
-      options,
-      { next: { revalidate: 1000 } }
-    ),
+    fetch(url, RapidAPIoptions, {
+      "Cache-Control": "no-cache",
+    }),
+
+    // fetch(
+    //   `https://api.themoviedb.org/3/movie/popular?language=en-US&page=1&timestamp=${timestamp}`,
+    //   options,
+    //   { next: { revalidate: 1000 } }
+    // ),
     fetch(
       `https://api.themoviedb.org/3/tv/popular?language=en-US&page=1&timestamp=${timestamp}`,
       options
@@ -44,7 +57,7 @@ async function fetchData() {
       top_ratedShowsRes.json(),
     ]);
   return {
-    popularMovies: popularMovies.results,
+    popularMovies: popularMovies,
     popularShows: popularShows.results,
     top_ratedMovies: top_ratedMovies.results,
     top_ratedShows: top_ratedShows.results,
@@ -56,7 +69,7 @@ async function Home() {
   try {
     const res = await fetchData();
     Data = res;
-    // console.log(Data);
+    console.log(Data);
   } catch (error) {
     if (error) {
       Data = data;

@@ -3,7 +3,7 @@
 //   headers: {
 //     accept: "application/json",
 //     Authorization:
-//       "Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDNmY2Q3MmIwN2VjNTY5ZWZjY2ZjMGIwYzZiODc4YyIsInN1YiI6IjY1MmMwYjRhMWYzZTYwMDBlMjkwOTBkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U5whOHRstQODVskBY8qrJgSSLGX6EhUU5hMdWyyHcYQ",
+//       `Bearer ${process.env.API_KEY}`,
 //   },
 // };
 
@@ -16,7 +16,7 @@
 //   method: "GET",
 //   headers: {
 //     accept: "application/json",
-//     Authorization: `Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIzMDNmY2Q3MmIwN2VjNTY5ZWZjY2ZjMGIwYzZiODc4YyIsInN1YiI6IjY1MmMwYjRhMWYzZTYwMDBlMjkwOTBkNyIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.U5whOHRstQODVskBY8qrJgSSLGX6EhUU5hMdWyyHcYQ`,
+//     Authorization:  `Bearer ${process.env.API_KEY}`,
 //     "Cache-Control": "no-cache",
 //   },
 // };
@@ -36,8 +36,9 @@ async function data() {
   const options = {
     method: "GET",
     headers: {
-      "X-RapidAPI-Key": "76a367ad41msh67c13acb7a32e3dp119d44jsnc42c6de349e4",
+      "X-RapidAPI-Key": process.env.REACT_APP_RAPID_API_KEY,
       "X-RapidAPI-Host": "imdb-top-100-movies.p.rapidapi.com",
+      "Cache-Control": "no-store",
     },
   };
 

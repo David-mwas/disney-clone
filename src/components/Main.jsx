@@ -9,6 +9,7 @@ import MoviesCollection from "@/src/components/MoviesCollection";
 import ShowsCollection from "@/src/components/ShowsCollection";
 function Main({ Data }) {
   const { data: session } = useSession();
+  // console.log(Data?.popularMovies);
   return (
     <SessionProvider session={session}>
       <main className="">
@@ -19,6 +20,10 @@ function Main({ Data }) {
           <main className="relative min-h-screen after:bg-home after:bg-center after:bg-cover after:bg-no-repeat after:bg-fixed after:absolute after:inset-0 after:z-[-2]">
             <Slider />
             <Brands />
+            <ShowsCollection
+              results={Data?.top_ratedShows}
+              title="Top Rated Shows"
+            />
             <MoviesCollection
               results={Data?.popularMovies}
               title="Popular Movies"
@@ -28,15 +33,10 @@ function Main({ Data }) {
               title="Popular Shows"
             />
 
-            <MoviesCollection
+            {/* <MoviesCollection
               results={Data?.top_ratedMovies}
               title="Top Rated Movies"
-            />
-
-            <ShowsCollection
-              results={Data?.top_ratedShows}
-              title="Top Rated Shows"
-            />
+            /> */}
           </main>
         )}
       </main>
