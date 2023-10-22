@@ -2,7 +2,7 @@
 
 import Head from "next/head";
 import Image from "next/image";
-
+import { signIn, signOut, useSession, SessionProvider } from "next-auth/react";
 function Hero() {
   return (
     <section className="relative">
@@ -25,7 +25,10 @@ function Hero() {
             height="150"
             objectFit="contain"
           />
-          <button className="bg-blue-600 uppercase text-xl tracking-wide font-extrabold py-4 px-6 w-full rounded hover:bg-[#0485ee]">
+          <button
+            className="bg-blue-600 uppercase text-xl tracking-wide font-extrabold py-4 px-6 w-full rounded hover:bg-[#0485ee]"
+            onClick={signIn}
+          >
             Get all there
           </button>
           <p className="text-sm text-center ">

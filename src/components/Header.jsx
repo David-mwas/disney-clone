@@ -61,7 +61,7 @@ function Header({ popularMovies }) {
           </button>
         ) : (
           <div
-            className="flex flex-col   items-center justify-center mt-4 cursor-pointer shadow-md  shadow-sky-600  px-[8px] py-[2px] rounded-b-[20px] bg-[#040714]"
+            className="flex flex-row   items-center justify-center mt-4 cursor-pointer shadow-md  shadow-sky-600  px-[10px] py-[3px] rounded-b-[20px] bg-[#040714]"
             onClick={() => signOut("google")}
           >
             <Image
@@ -69,12 +69,21 @@ function Header({ popularMovies }) {
               alt={`${session?.user?.name} image`}
               width={40}
               height={40}
-              className=" rounded-full object-cover object-top "
+              className="ml-4 rounded-full object-cover object-top "
             />
 
-            <p className="text-[#fff] mt-[2px] text-center text-[8px] uppercase mb-2  bg-transparent tracking-widest ">
-              {session?.user?.name}
-            </p>
+            <div className=" flex flex-col justify-center items-center text-center ml-1.5">
+              {" "}
+              <p className=" text-[#fff] text-center text-[8px] uppercase mb-2  bg-transparent tracking-widest ">
+                {session?.user?.name}
+              </p>
+              <button
+                className="uppercase font-medium tracking-wide mt-[-10px]"
+                onClick={signOut}
+              >
+                Logout
+              </button>
+            </div>
           </div>
         )}
       </header>
