@@ -25,7 +25,7 @@ function Show({ result, session }) {
     if (!session) {
       router.push("/");
     }
-  }, []);
+  }, [session]);
 
   const index = result?.videos?.results?.findIndex(
     (element) => element.type //=== "Clip"
