@@ -22,6 +22,7 @@ function Movie({ result, session }) {
     if (!session) {
       router.push("/");
     }
+    router.push(`/movie/${result.id}`);
   }, [session]);
 
   // const index = result?.videos?.results?.findIndex(
@@ -44,8 +45,8 @@ function Movie({ result, session }) {
                 // src={
                 //   `${BASE_URL}${result.backdrop_path || result.poster_path}` ||
                 //   `${BASE_URL}${result.poster_path}`
-                  // }
-                  
+                // }
+
                 layout="fill"
                 objectFit="cover"
                 priority={true}

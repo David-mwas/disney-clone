@@ -25,6 +25,7 @@ function Show({ result, session }) {
     if (!session) {
       router.push("/");
     }
+    router.push(`/show/${result.id}`);
   }, [session]);
 
   const index = result?.videos?.results?.findIndex(
