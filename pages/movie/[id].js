@@ -18,25 +18,24 @@ function Movie({ result, session }) {
   // const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const router = useRouter();
   const [showPlayer, setShowPlayer] = useState(false);
-  useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
-    router.push(`/movie/${result.id}`);
-  }, [session]);
+  // useEffect(() => {
+  //   if (!session) {
+  //     router.push("/");
+  //   }
+  // }, []);
 
   // const index = result?.videos?.results?.findIndex(
   //   (element) => element.type //=== "Clip"
   // );
 
-  console.log(session);
+  console.log(result);
   return (
     <SessionProvider session={session}>
       <div className="relative">
-        <Header />
+        {/* <Header />
         {!session ? (
           <Hero />
-        ) : (
+        ) : ( */}
           <section className="relative z-50 bg-[rgba(0,0,0,.2)]">
             <div className="min-h-[calc(100vh-72px)]  z-50 bg-[rgba(0,0,0,.6)] absolute top-0"></div>
             <div className="relative min-h-[calc(100vh-72px)]">
@@ -93,7 +92,6 @@ function Movie({ result, session }) {
 
               <p className="text-sm md:text-sm">
                 {result?.year || result.first_air_date} • {result?.genre}{" "}
-                {result?.writers[0]}{" "}
                 {/* {result.number_of_seasons === 1 ? "Season" : "Seasons"} •{" "}
                 {result.genres.map((genre) => genre.name + " ")}{" "} */}
               </p>
@@ -134,7 +132,7 @@ function Movie({ result, session }) {
               </div>
             </div>
           </section>
-        )}
+        {/* )} */}
       </div>
     </SessionProvider>
   );
