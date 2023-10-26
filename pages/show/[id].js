@@ -12,37 +12,37 @@ import Hero from "@/src/components/Hero";
 import { PlusIcon, XIcon } from "@heroicons/react/solid";
 // import ReactPlayer from "react-player/lazy";
 
-function Show({ result, session }) {
+function Show({ result,session  }) {
   const ReactPlayer = dynamic(() => import("react-player/lazy"), {
     ssr: false,
   });
-  // const [session] = useSession();
+  // const {data:session} = useSession();
   const BASE_URL = "https://image.tmdb.org/t/p/original/";
   const router = useRouter();
   const [showPlayer, setShowPlayer] = useState(false);
 
   useEffect(() => {
-    if (!session) {
-      router.push("/");
-    }
+    // if (!session) {
+    //   router.push("/");
+    // }
     router.push(`/show/${result.id}`);
-  }, [session]);
+  }, []);
 
   const index = result?.videos?.results?.findIndex(
     (element) => element.type //=== "Clip"
   );
   console.log(result);
   return (
-    <SessionProvider>
+    <SessionProvider session={session}>
       <div className="relative">
         <Head>
           <title>{result.title || result.original_name}</title>
           <link rel="icon" href="/favicon.ico" />
         </Head>
         <Header />
-        {!session ? (
+        {/* {!!session ? (
           <Hero />
-        ) : (
+        ) : ( */}
           <section className="relative z-50">
             <div className="relative min-h-[calc(100vh-72px)]">
               <Image
@@ -136,7 +136,7 @@ function Show({ result, session }) {
               </div>
             </div>
           </section>
-        )}
+        {/* )} */}
       </div>
     </SessionProvider>
   );
